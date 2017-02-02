@@ -9,8 +9,54 @@ This program is available under Apache License Version 2.0, available at https:/
 
 ```html
 <vaadin-form-layout>
+  <vaadin-text-field label="First Name"></vaadin-text-field>
+  <vaadin-text-field label="Last Name"></vaadin-text-field>
+  <vaadin-text-field label="Email"></vaadin-text-field>
 </vaadin-form-layout>
 ```
+
+The element defines a horizontal layout of 12 column units for its children,
+with gaps between the columns.
+
+## Multiple Columns
+
+By default, all children take full width of the layout (12 column units). For
+each child element, you can set a custom number of columns to span the element
+on by using the `--vaadin-form-layout-colspan` custom CSS property:
+
+```html
+<vaadin-form-layout>
+  <vaadin-text-field style="--vaadin-form-layout-colspan: 6;"></vaadin-text-field>
+  <vaadin-text-field style="--vaadin-form-layout-colspan: 6;"></vaadin-text-field>
+</vaadin-form-layout>
+```
+
+You can also insert `<br>` elements to split layout rows:
+
+```html
+<vaadin-form-layout>
+  <vaadin-text-field style="--vaadin-form-layout-colspan: 4;"></vaadin-text-field>
+  <br>
+  <vaadin-text-field style="--vaadin-form-layout-colspan: 4;"></vaadin-text-field>
+</vaadin-form-layout>
+```
+
+## Custom CSS Properties
+
+`<vaadin-form-layout>` supports the following CSS properties:
+
+Custom CSS property | Description | Default
+---|---|---
+<nobr>`--vaadin-form-layout-column-gap`</nobr> | Size of the gap (empty space) between the columns | `16px`
+<nobr>`--vaadin-form-layout-label-colspan`</nobr> | Horizontal label size in number of columns | `2`
+
+In addition, the following properties are set for the children:
+
+Custom CSS property | Description | Default
+---|---|---
+<nobr>`--vaadin-form-layout-colspan`</nobr> | Horizontal size of a child element in number of columns | `12`
+<nobr>`--vaadin-form-layout-label-basis`</nobr> | Width of the label part for the child input element. Matches number of columns defined in `--vaadin-form-layout-label-colspan`. | calculated
+<nobr>`--vaadin-form-layout-label-gap`</nobr> | Size of the gap between the label and the input box parts of the child input element. Matches `--vaadin-form-layout-column-gap`. | calculated
 
 @element vaadin-form-layout
 @demo demo/index.html
@@ -23,27 +69,72 @@ This program is available under Apache License Version 2.0, available at https:/
     <style>
       :host {
         display: block;
+
+        /* API */
+        --vaadin-form-layout-column-gap: 16px;
+        --vaadin-form-layout-label-colspan: 2;
+
+        /* private */
+        --vaadin-form-layout-columns: 12;
+      }
+
+      #layout {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 calc(0 - var(--vaadin-form-layout-column-gap) / 2);
+      }
+
+      #layout ::slotted(*) {
+        /* API, writeable */
+        --vaadin-form-layout-colspan: var(--vaadin-form-layout-columns);
+
+        /* private */
+        --vaadin-form-layout-column-basis: calc(
+          100% * var(--vaadin-form-layout-colspan) / var(--vaadin-form-layout-columns)
+          - var(--vaadin-form-layout-column-gap)
+        );
+
+        flex: 0 0 var(--vaadin-form-layout-column-basis);
+        margin-left: calc(var(--vaadin-form-layout-column-gap) / 2);
+        margin-right: calc(var(--vaadin-form-layout-column-gap) / 2);
+
+        /* API, read-only computed */
+        --vaadin-form-layout-label-basis: calc(
+          (100% + var(--vaadin-form-layout-column-gap))
+          * (var(--vaadin-form-layout-label-colspan) / var(--vaadin-form-layout-colspan))
+          - var(--vaadin-form-layout-column-gap)
+        );
+        --vaadin-form-layout-label-gap: var(--vaadin-form-layout-column-gap);
+      }
+
+      #layout ::slotted(vaadin-text-field) {
+        flex-direction: row;
+      }
+
+      #layout ::slotted(br) {
+        display: block;
+        content: '';
+        flex: 1 1 100%;
+        width: 9999px; /* Firefox :-( */
       }
     </style>
-    <slot></slot>
+    <div id="layout">
+      <slot></slot>
+    </div>
   </template>
 
   <script>
-    if (!window.Vaadin) window.Vaadin = {};
-
-    Vaadin.FormLayoutElement = class VaadinFormLayoutElement extends Polymer.Element {
+    class VaadinFormLayoutElement extends Polymer.Element {
       static get is() {
         return 'vaadin-form-layout';
       }
 
-      static get config() {
+      static get properties() {
         return {
-          properties: {
-          }
         };
       }
     };
 
-    customElements.define(Vaadin.FormLayoutElement.is, Vaadin.FormLayoutElement);
+    customElements.define(VaadinFormLayoutElement.is, VaadinFormLayoutElement);
   </script>
 </dom-module>
