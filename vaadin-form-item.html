@@ -1,0 +1,71 @@
+<!--
+@license
+Copyright (c) 2017 Vaadin Ltd.
+This program is available under Apache License Version 2.0, available at https://vaadin.com/license/
+-->
+
+<!--
+`<vaadin-form-item>` is a Polymer element providing form item wrapper for using inside `<vaadin-form-layout>`.
+
+
+@element vaadin-form-item
+@demo demo/index.html
+-->
+
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="vaadin-form-item">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+
+      #label {
+        flex: 0 0 var(--vaadin-form-layout-label-basis);
+        text-align: end;
+      }
+
+      #gap {
+        width: var(--vaadin-form-layout-label-gap);
+        flex: 0 0 auto;
+      }
+
+      :host ::slotted(:not([slot="label"])) {
+        flex: 1 1 auto;
+      }
+
+      :host ::slotted(input) {
+        min-width: 0;
+      }
+    </style>
+    <div id="label" on-click="_onLabelClick">
+      <slot name="label"></slot>
+    </div>
+    <div id="gap"></div>
+    <slot id="content"></slot>
+  </template>
+
+  <script>
+    class VaadinFormItemElement extends Polymer.Element {
+      static get is() {
+        return 'vaadin-form-item';
+      }
+
+      static get properties() {
+        return {
+        };
+      }
+
+      _onLabelClick(e) {
+        let firstContentElementChild = this.$.content.assignedNodes()
+            .find((e) => e.nodeType === Node.ELEMENT_NODE);
+        if (firstContentElementChild) {
+          firstContentElementChild.focus();
+        }
+      }
+    }
+
+    customElements.define(VaadinFormItemElement.is, VaadinFormItemElement);
+  </script>
+</dom-module>

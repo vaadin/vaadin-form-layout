@@ -89,26 +89,15 @@ Custom CSS property | Description | Default
         --vaadin-form-layout-colspan: var(--vaadin-form-layout-columns);
 
         /* private */
-        --vaadin-form-layout-column-basis: calc(
-          100% * var(--vaadin-form-layout-colspan) / var(--vaadin-form-layout-columns)
-          - var(--vaadin-form-layout-column-gap)
-        );
+        --vaadin-form-layout-column-basis: calc(100% * var(--vaadin-form-layout-colspan) / var(--vaadin-form-layout-columns) - var(--vaadin-form-layout-column-gap));
 
         flex: 0 0 var(--vaadin-form-layout-column-basis);
         margin-left: calc(var(--vaadin-form-layout-column-gap) / 2);
         margin-right: calc(var(--vaadin-form-layout-column-gap) / 2);
 
         /* API, read-only computed */
-        --vaadin-form-layout-label-basis: calc(
-          (100% + var(--vaadin-form-layout-column-gap))
-          * (var(--vaadin-form-layout-label-colspan) / var(--vaadin-form-layout-colspan))
-          - var(--vaadin-form-layout-column-gap)
-        );
+        --vaadin-form-layout-label-basis: calc((100% + var(--vaadin-form-layout-column-gap)) * (var(--vaadin-form-layout-label-colspan) / var(--vaadin-form-layout-colspan)) - var(--vaadin-form-layout-column-gap));
         --vaadin-form-layout-label-gap: var(--vaadin-form-layout-column-gap);
-      }
-
-      #layout ::slotted(vaadin-text-field) {
-        flex-direction: row;
       }
 
       #layout ::slotted(br) {
@@ -133,7 +122,7 @@ Custom CSS property | Description | Default
         return {
         };
       }
-    };
+    }
 
     customElements.define(VaadinFormLayoutElement.is, VaadinFormLayoutElement);
   </script>
