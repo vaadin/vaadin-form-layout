@@ -54,27 +54,27 @@
       <template>
         <vaadin-form-layout>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 6;">
+          <vaadin-form-item style="max-width: calc(6 * var(--column));">
             <label slot="label">First Name</label>
             <input value="Jane">
           </vaadin-form-item>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 6;">
+          <vaadin-form-item style="max-width: calc(6 * var(--column));">
             <label slot="label">Last Name</label>
             <input value="Jane">
           </vaadin-form-item>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 4;">
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
             <label slot="label">Foo</label>
             <input>
           </vaadin-form-item>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 4;">
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
             <label slot="label">Bar</label>
             <input>
           </vaadin-form-item>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 4;">
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
             <label slot="label">Baz</label>
             <input>
           </vaadin-form-item>
@@ -88,14 +88,14 @@
       <template>
         <vaadin-form-layout>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 4;">
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
             <label slot="label">Qux</label>
             <input>
           </vaadin-form-item>
 
           <br>
 
-          <vaadin-form-item style="--vaadin-form-layout-colspan: 8;">
+          <vaadin-form-item style="max-width: calc(8 * var(--column));">
             <label slot="label">Quz</label>
             <input>
           </vaadin-form-item>
@@ -111,16 +111,16 @@
           <vaadin-text-field label="Email" value="jane.doe@example.com"></vaadin-text-field>
           <vaadin-text-field label="Phone" value="555-0199"></vaadin-text-field>
 
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 6;" label="First Name" value="Jane"></vaadin-text-field>
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 6;" label="Last Name" value="Doe"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(6 * var(--column));" label="First Name" value="Jane"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(6 * var(--column));" label="Last Name" value="Doe"></vaadin-text-field>
 
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 4;" label="Foo"></vaadin-text-field>
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 4;" label="Bar"></vaadin-text-field>
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 4;" label="Baz"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Foo"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Bar"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Baz"></vaadin-text-field>
 
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 4;" label="Qux"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Qux"></vaadin-text-field>
           <br>
-          <vaadin-text-field style="--vaadin-form-layout-colspan: 8;" label="Quz"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(8 * var(--column));" label="Quz"></vaadin-text-field>
         </vaadin-form-layout>
       </template>
     </demo-snippet>
@@ -132,16 +132,16 @@
           <paper-input label="Email" value="jane.doe@example.com"></paper-input>
           <paper-input label="Phone" value="555-0199"></paper-input>
 
-          <paper-input style="--vaadin-form-layout-colspan: 6;" label="First Name" value="Jane"></paper-input>
-          <paper-input style="--vaadin-form-layout-colspan: 6;" label="Last Name" value="Doe"></paper-input>
+          <paper-input style="max-width: calc(6 * var(--column));" label="First Name" value="Jane"></paper-input>
+          <paper-input style="max-width: calc(6 * var(--column));" label="Last Name" value="Doe"></paper-input>
 
-          <paper-input style="--vaadin-form-layout-colspan: 4;" label="Foo"></paper-input>
-          <paper-input style="--vaadin-form-layout-colspan: 4;" label="Bar"></paper-input>
-          <paper-input style="--vaadin-form-layout-colspan: 4;" label="Baz"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Foo"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Bar"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Baz"></paper-input>
 
-          <paper-input style="--vaadin-form-layout-colspan: 4;" label="Qux"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Qux"></paper-input>
           <br>
-          <paper-input style="--vaadin-form-layout-colspan: 8;" label="Quz"></paper-input>
+          <paper-input style="max-width: calc(8 * var(--column));" label="Quz"></paper-input>
         </vaadin-form-layout>
       </template>
     </demo-snippet>

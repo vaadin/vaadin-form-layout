@@ -31,7 +31,7 @@ This program is available under Apache License Version 2.0, available at https:/
         flex: 0 0 auto;
       }
 
-      :host ::slotted(:not([slot="label"])) {
+      #content {
         flex: 1 1 auto;
       }
 
@@ -43,7 +43,9 @@ This program is available under Apache License Version 2.0, available at https:/
       <slot name="label"></slot>
     </div>
     <div id="gap"></div>
-    <slot id="content"></slot>
+    <div id="content">
+      <slot id="contentSlot"></slot>
+    </div>
   </template>
 
   <script>
@@ -58,7 +60,7 @@ This program is available under Apache License Version 2.0, available at https:/
       }
 
       _onLabelClick(e) {
-        let firstContentElementChild = this.$.content.assignedNodes()
+        let firstContentElementChild = this.$.contentSlot.assignedNodes()
             .find((e) => e.nodeType === Node.ELEMENT_NODE);
         if (firstContentElementChild) {
           firstContentElementChild.focus();
