@@ -9,6 +9,20 @@
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="common.html">
+
+  <!-- debug column stripes background:
+  <style is="custom-style">
+    vaadin-form-layout {
+      background-size: 16.667% 32px;
+      background-image: linear-gradient(90deg,
+        rgba(0, 0, 0, 0.10),
+        rgba(0, 0, 0, 0.10) 50%,
+        rgba(0, 0, 0, 0.05) 50%,
+        rgba(0, 0, 0, 0.05) 100%
+      );
+    }
+  </style>
+  -->
 </head>
 
 <body>
@@ -16,24 +30,118 @@
 
     <!-- <demo-navigation></demo-navigation> -->
 
-    <h3>Basic Usage</h3>
+    <h3>Basic Usage, Single Column Layout</h3>
     <demo-snippet>
       <template>
         <vaadin-form-layout>
-          <vaadin-input value="Jane"></vaadin-input>
-          <vaadin-input value="Doe"></vaadin-input>
-          <vaadin-input value="jane.doe@example.com"></vaadin-input>
+
+          <vaadin-form-item>
+            <label slot="label">Email</label>
+            <input value="jane.doe@example.com">
+          </vaadin-form-item>
+
+          <vaadin-form-item>
+            <label slot="label">Phone</label>
+            <input value="555-0199">
+          </vaadin-form-item>
+
         </vaadin-form-layout>
       </template>
     </demo-snippet>
 
-    <h3>With Paper Input</h3>
+    <h3>Multiple Column Layouts</h3>
     <demo-snippet>
       <template>
         <vaadin-form-layout>
-          <paper-input label="First Name" value="Jane"></paper-input>
-          <paper-input label="Last Name" value="Doe"></paper-input>
+
+          <vaadin-form-item style="max-width: calc(6 * var(--column));">
+            <label slot="label">First Name</label>
+            <input value="Jane">
+          </vaadin-form-item>
+
+          <vaadin-form-item style="max-width: calc(6 * var(--column));">
+            <label slot="label">Last Name</label>
+            <input value="Jane">
+          </vaadin-form-item>
+
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
+            <label slot="label">Foo</label>
+            <input>
+          </vaadin-form-item>
+
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
+            <label slot="label">Bar</label>
+            <input>
+          </vaadin-form-item>
+
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
+            <label slot="label">Baz</label>
+            <input>
+          </vaadin-form-item>
+
+        </vaadin-form-layout>
+      </template>
+    </demo-snippet>
+
+    <h3>Explicit Layout Rows</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-form-layout>
+
+          <vaadin-form-item style="max-width: calc(4 * var(--column));">
+            <label slot="label">Qux</label>
+            <input>
+          </vaadin-form-item>
+
+          <br>
+
+          <vaadin-form-item style="max-width: calc(8 * var(--column));">
+            <label slot="label">Quz</label>
+            <input>
+          </vaadin-form-item>
+
+        </vaadin-form-layout>
+      </template>
+    </demo-snippet>
+
+    <h3>Using with Vaadin Text Field</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-form-layout>
+          <vaadin-text-field label="Email" value="jane.doe@example.com"></vaadin-text-field>
+          <vaadin-text-field label="Phone" value="555-0199"></vaadin-text-field>
+
+          <vaadin-text-field style="max-width: calc(6 * var(--column));" label="First Name" value="Jane"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(6 * var(--column));" label="Last Name" value="Doe"></vaadin-text-field>
+
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Foo"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Bar"></vaadin-text-field>
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Baz"></vaadin-text-field>
+
+          <vaadin-text-field style="max-width: calc(4 * var(--column));" label="Qux"></vaadin-text-field>
+          <br>
+          <vaadin-text-field style="max-width: calc(8 * var(--column));" label="Quz"></vaadin-text-field>
+        </vaadin-form-layout>
+      </template>
+    </demo-snippet>
+
+    <h3>Using with Paper Input</h3>
+    <demo-snippet>
+      <template>
+        <vaadin-form-layout>
           <paper-input label="Email" value="jane.doe@example.com"></paper-input>
+          <paper-input label="Phone" value="555-0199"></paper-input>
+
+          <paper-input style="max-width: calc(6 * var(--column));" label="First Name" value="Jane"></paper-input>
+          <paper-input style="max-width: calc(6 * var(--column));" label="Last Name" value="Doe"></paper-input>
+
+          <paper-input style="max-width: calc(4 * var(--column));" label="Foo"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Bar"></paper-input>
+          <paper-input style="max-width: calc(4 * var(--column));" label="Baz"></paper-input>
+
+          <paper-input style="max-width: calc(4 * var(--column));" label="Qux"></paper-input>
+          <br>
+          <paper-input style="max-width: calc(8 * var(--column));" label="Quz"></paper-input>
         </vaadin-form-layout>
       </template>
     </demo-snippet>
