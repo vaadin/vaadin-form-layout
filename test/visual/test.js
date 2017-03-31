@@ -1,7 +1,15 @@
 gemini.suite('vaadin-form-layout', (rootSuite) => {
 
   var demos = [
-    {name: 'index', snippets: ['basic', 'paper-input']}
+    {name: 'index', snippets: [
+      'basic',
+      'single-column',
+      'columns',
+      'colspan',
+      'br',
+      'column-gap',
+      'paper-input'
+    ]}
   ];
 
   demos.forEach(function(demo) {
