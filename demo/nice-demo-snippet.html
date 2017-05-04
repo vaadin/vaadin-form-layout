@@ -1,0 +1,132 @@
+<link rel="import" href="../../polymer/polymer-element.html">
+<link rel="import" href="../../prism-element/prism-highlighter.html">
+<link rel="import" href="../../prism-element/prism-theme-default.html">
+<link rel="import" href="../../marked-element/marked-element.html">
+
+<!--
+`<nice-demo-snippet>` is a Polymer element displaying the provided HTML example
+code with the hightlighted source below.
+
+`<nice-demo-snippet>` is similar to `<demo-snippet>` element from the
+PolymerElements/iron-demo-helpers.
+
+Usage:
+
+<nice-demo-snippet>
+  <script type="text/html" slot="source">
+    <h1>Hello, world!</h1>
+  </script>
+</nice-demo-snippet>
+
+`<nice-demo-snippet>` expects `<script type="text/html">` child element defining
+the source code, unlike the `<demo-snippet>`, which uses `<template>`.  This
+allows to display the code snippet intact, exactly as it was written, preserving
+line breaks, quotation symbols, JSON in HTML attributes, and so on.
+
+Similarly to `<demo-snippet>`, The source is rendered in the light DOM,
+allowing easy styling and scripting in the parent (document) scope.
+
+@polymerElement
+-->
+
+<dom-module id="nice-demo-snippet">
+  <template>
+    <style is="custom-style" include="prism-theme-default"></style>
+    <style>
+      /*
+        The styles are partly copied from <demo-snippet>. See demo-snippet.html
+        in PolymerElements/iron-demo-helpers package for the original source.
+       */
+
+      :host {
+        display: block;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+      }
+
+      .demo {
+        border-bottom: 1px solid var(--google-grey-300, #e0e0e0);
+        background-color: white;
+        padding: 20px;
+      }
+
+      .code {
+        background-color: var(--google-grey-100, #f5f5f5);
+        font-size: 13px;
+        overflow: auto;
+        padding: 0 20px;
+      }
+
+      .code > pre {
+        padding: 0 0 16px;
+      }
+    </style>
+    <div class="demo">
+      <slot></slot>
+    </div>
+    <prism-highlighter></prism-highlighter>
+    <marked-element id="markedElement">
+      <div slot="markdown-html" class="code"></div>
+    </marked-element>
+    <slot name="source" id="sourceSlot" on-slotchange="_extractSource"></slot>
+  </template>
+  <script>
+    (function() {
+      class NiceDemoSnippetElement extends Polymer.Element {
+        static get is() {
+          return 'nice-demo-snippet';
+        }
+
+        static get properties() {
+          return {
+            _source: String,
+            _demoRenderer: Element
+          };
+        }
+
+        static get observers() {
+          return [
+            '_render(_source, _demoRenderer)'
+          ];
+        }
+
+        connectedCallback() {
+          super.connectedCallback();
+
+          if (!this._demoRenderer) {
+            this._demoRenderer = document.createElement('div');
+            this.appendChild(this._demoRenderer);
+          }
+
+          this._extractSource();
+        }
+
+        disconnectedCallback() {
+          super.disconnectedCallback();
+
+          if (this._demoRenderer) {
+            if (this._demoRenderer.parentNode) {
+              this._demoRenderer.parentNode.removeChild(this._demoRenderer);
+            }
+
+            this._demoRenderer = null;
+          }
+        }
+
+        _extractSource() {
+          this._source = this.$.markedElement.unindent(
+              this.$.sourceSlot.assignedNodes().map(node => node.innerHTML).join('')
+          );
+        }
+
+        _render(source, demoRenderer) {
+          if (!source || !demoRenderer) return;
+
+          this.$.markedElement.markdown = '```html\n' + source + '\n```';
+          demoRenderer.innerHTML = source;
+        }
+      }
+
+      customElements.define(NiceDemoSnippetElement.is, NiceDemoSnippetElement);
+    })();
+  </script>
+</dom-module>
