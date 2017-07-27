@@ -286,7 +286,9 @@ This program is available under Apache License Version 2.0, available at https:/
         }
 
         _naturalNumberOrOne(n) {
-          if (typeof n === 'number' && n >= 1 && n < Infinity) return Math.floor(n);
+          if (typeof n === 'number' && n >= 1 && n < Infinity) {
+            return Math.floor(n);
+          }
           return 1;
         }
 
@@ -300,7 +302,9 @@ This program is available under Apache License Version 2.0, available at https:/
           // - `word-spacing` is used since its shorter.
 
           // Disallow known keywords allowed as the `word-spacing` value
-          if (value === 'inherit' || value === 'normal') return false;
+          if (value === 'inherit' || value === 'normal') {
+            return false;
+          }
 
           // Use the value in a stylesheet and check the parsed value. Invalid
           // input value results in empty parsed value.
@@ -337,7 +341,7 @@ This program is available under Apache License Version 2.0, available at https:/
                 throw new Error(`Invalid 'labelsPosition' value of ${step.labelsPosition}, 'aside' or 'top' string is required.`);
               }
             });
-          } catch(e) {
+          } catch (e) {
             if (oldResponsiveSteps && oldResponsiveSteps !== responsiveSteps) {
               console.warn(`${e.message} Using previously set 'responsiveSteps' instead.`);
               this.responsiveSteps = oldResponsiveSteps;
@@ -415,7 +419,9 @@ This program is available under Apache License Version 2.0, available at https:/
             child.style.width = `calc(${childRatio * 99.999}% - ${columnGap})`;
 
             if (child.localName === 'vaadin-form-item') {
-              if (this._labelsOnTop) {
+              // Checking of the child's attribute allows to find out if attribute was set initially,
+              // Not with the responsive steps
+              if (this._labelsOnTop || child.hasAttribute('label-position')) {
                 child.setAttribute('label-position', 'top');
               } else {
                 child.removeAttribute('label-position');
