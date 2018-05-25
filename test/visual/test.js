@@ -51,7 +51,7 @@ gemini.suite('vaadin-form-layout', function(rootSuite) {
       suite
         .setUrl(`${testName}.html`)
         .setCaptureElements('#capture')
-        .capture('default', setBodyWidth('100%'))
+        .capture('default', setBodyWidth(''))
         .capture('20em', setBodyWidth('20em'))
         .capture('10em', setBodyWidth('10em'));
     });
