@@ -25,6 +25,8 @@ gemini.suite('vaadin-form-layout', function(rootSuite) {
     // substitution for the provided bodyWidth.
     const resizeBodyFn = new Function('window', `
       window.document.body.style.width = '${bodyWidth}';
+      window.document.body.style.margin = '0';
+      window.document.body.style.padding = '0';
       window.dispatchEvent(new window.CustomEvent('resize'));
     `);
     return function(actions, find) {
@@ -49,7 +51,7 @@ gemini.suite('vaadin-form-layout', function(rootSuite) {
       suite
         .setUrl(`${testName}.html`)
         .setCaptureElements('#capture')
-        .capture('default')
+        .capture('default', setBodyWidth('100%'))
         .capture('20em', setBodyWidth('20em'))
         .capture('10em', setBodyWidth('10em'));
     });
