@@ -284,6 +284,15 @@ This program is available under Apache License Version 2.0, available at https:/
 
           Polymer.RenderStatus.beforeNextRender(this, this._selectResponsiveStep);
           Polymer.RenderStatus.beforeNextRender(this, this.updateStyles);
+
+          // Observe changes in form item's `colspan` attribute
+          const config = {attributes: true, subtree: true};
+          this.__mutationObserver = new MutationObserver(this.updateStyles.bind(this));
+          this.__mutationObserver.observe(Polymer.dom(this).node, config);
+        }
+
+        disconnectedCallback() {
+          this.__mutationObserver.disconnect();
         }
 
         _naturalNumberOrOne(n) {
