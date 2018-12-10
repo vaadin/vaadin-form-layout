@@ -36,6 +36,17 @@
     </template>
   </test-fixture>
 
+  <test-fixture id="colspan-form-item">
+    <template>
+      <vaadin-form-layout style='width: 300px' responsive-steps='[{"columns": 1}]'>
+        <vaadin-form-item>
+          <label slot="label">Label</label>
+          <vaadin-text-field class="full-width"></vaadin-text-field>
+        </vaadin-form-item>
+      </vaadin-form-layout>
+    </template>
+  </test-fixture>
+
   <test-fixture id="flex-child">
     <template>
       <div style="display: flex">
@@ -510,6 +521,21 @@
         const ev = new Event('animationend');
         ev.animationName = 'foo';
         layout.dispatchEvent(ev);
+      });
+    });
+
+    describe('colspan form item width', function() {
+      let layout, formItem, textField;
+
+      beforeEach(() => {
+        layout = fixture('colspan-form-item');
+        formItem = layout.querySelector('vaadin-form-item');
+        textField = formItem.querySelector('vaadin-text-field');
+      });
+
+      it('should shrink input to the size of the form item', () => {
+        expect(layout.getBoundingClientRect().right).to.be.above(textField.getBoundingClientRect().right);
+        expect(formItem.getBoundingClientRect().right).to.be.closeTo(textField.getBoundingClientRect().right, .1);
       });
     });
 
