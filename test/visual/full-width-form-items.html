@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script>
+    const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
+    document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-layout.html">`);
+    document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-item.html">`);
+    document.write(`<link rel="import" href="../../../vaadin-text-field/theme/${theme}/vaadin-text-field.html">`);
+  </script>
+  <link rel="import" href="../../../polymer/polymer-element.html">
+  <script>
+    window.addEventListener('WebComponentsReady', function() {
+      setTimeout(function() {
+        window.ShadyDOM && window.ShadyDOM.flush(); // Force DOM composition
+        window.webComponentsAreReady = true; // Checked in gemini before capture callback
+      });
+    });
+  </script>
+</head>
+<body style="width: 700px;" id="capture">
+
+  <h3>Full width form items</h3>
+
+  <vaadin-form-layout style="width: 641px;"
+      responsive-steps='[{"minWidth": 0, "columns": 2}]'>
+    <vaadin-form-item>
+      <label slot="label">First Name</label>
+      <vaadin-text-field class="full-width"></vaadin-text-field>
+    </vaadin-form-item>
+    <vaadin-form-item>
+      <label slot="label">Last Name</label>
+      <vaadin-text-field class="full-width"></vaadin-text-field>
+    </vaadin-form-item>
+    <vaadin-form-item colspan="2">
+      <label slot="label">Email</label>
+      <vaadin-text-field class="full-width"></vaadin-text-field>
+    </vaadin-form-item>
+  </vaadin-form-layout>
+
+</body>
+</html>
