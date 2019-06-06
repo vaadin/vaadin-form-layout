@@ -49,6 +49,10 @@ This program is available under Apache License Version 2.0, available at https:/
         margin-left: calc(0.5 * var(--vaadin-form-layout-column-spacing));
         margin-right: calc(0.5 * var(--vaadin-form-layout-column-spacing));
       }
+
+      #layout ::slotted(br) {
+        display: none;
+      }
     </style>
     <div id="layout">
       <slot id="slot"></slot>
@@ -460,16 +464,13 @@ This program is available under Apache License Version 2.0, available at https:/
 
           let col = 0;
           Array.from(this.children).forEach((child, index) => {
-            if (getComputedStyle(child).display !== 'none') {
-              if (child.localName === 'br') {
-                // Reset column count on line break
-                col = 0;
-                return;
-              }
-
+            if (child.localName === 'br') {
+              // Reset column count on line break
+              col = 0;
+            } else if (getComputedStyle(child).display !== 'none') {
               const followingVisibleItems = Array.from(this.children)
                 .slice(index + 1)
-                .filter(item => getComputedStyle(item).display !== 'none');
+                .filter(item => item.localName === 'br' || getComputedStyle(item).display !== 'none');
 
               const nextLineBreak = followingVisibleItems.length > 0 &&
                 followingVisibleItems[0].localName === 'br';
