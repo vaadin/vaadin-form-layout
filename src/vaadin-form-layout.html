@@ -463,21 +463,21 @@ This program is available under Apache License Version 2.0, available at https:/
           }
 
           let col = 0;
-          Array.from(this.children).forEach((child, index) => {
-            if (child.localName === 'br') {
-              // Reset column count on line break
-              col = 0;
-            } else if (getComputedStyle(child).display !== 'none') {
-              const followingVisibleItems = Array.from(this.children)
-                .slice(index + 1)
-                .filter(item => item.localName === 'br' || getComputedStyle(item).display !== 'none');
+          Array.from(this.children)
+            .filter(child => child.localName === 'br' || getComputedStyle(child).display !== 'none')
+            .forEach((child, index, children) => {
+              if (child.localName === 'br') {
+                // Reset column count on line break
+                col = 0;
+                return;
+              }
 
-              const nextLineBreak = followingVisibleItems.length > 0 &&
-                followingVisibleItems[0].localName === 'br';
+              const nextIndex = index + 1;
+              const nextLineBreak = nextIndex < children.length && children[nextIndex].localName === 'br';
 
               if (nextLineBreak) {
                 const colspanRatio = (this._columnCount - col - 1) / this._columnCount;
-                child.style.paddingRight = `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`;
+                child.style.setProperty(marginEndProp, `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`);
               }
 
               let colspan;
@@ -505,9 +505,9 @@ This program is available under Apache License Version 2.0, available at https:/
               }
 
               // At the end edge
-              if (nextLineBreak || col + colspan === this._columnCount) {
+              if (col + colspan === this._columnCount) {
                 child.style.setProperty(marginEndProp, '0px');
-              } else {
+              } else if (!nextLineBreak) {
                 child.style.removeProperty(marginEndProp);
               }
 
@@ -521,8 +521,7 @@ This program is available under Apache License Version 2.0, available at https:/
                   child.removeAttribute('label-position');
                 }
               }
-            }
-          });
+            });
         }
       }
 
