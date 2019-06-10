@@ -472,14 +472,6 @@ This program is available under Apache License Version 2.0, available at https:/
                 return;
               }
 
-              const nextIndex = index + 1;
-              const nextLineBreak = nextIndex < children.length && children[nextIndex].localName === 'br';
-
-              if (nextLineBreak) {
-                const colspanRatio = (this._columnCount - col - 1) / this._columnCount;
-                child.style.setProperty(marginEndProp, `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`);
-              }
-
               let colspan;
               colspan = this._naturalNumberOrOne(parseFloat(child.getAttribute('colspan')));
 
@@ -495,6 +487,14 @@ This program is available under Apache License Version 2.0, available at https:/
               if (col + colspan > this._columnCount) {
                 // Too big to fit on this row, let’s wrap it
                 col = 0;
+              }
+
+              const nextIndex = index + 1;
+              const nextLineBreak = nextIndex < children.length && children[nextIndex].localName === 'br';
+
+              if (nextLineBreak) {
+                const colspanRatio = (this._columnCount - col - colspan) / this._columnCount;
+                child.style.setProperty(marginEndProp, `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`);
               }
 
               // At the start edge
