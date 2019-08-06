@@ -558,7 +558,7 @@
       it('should update layout after a new item is added', async() => {
         const newFormItem = document.createElement('vaadin-form-item');
         newFormItem.innerHTML = '<label slot="label">Age</label><input class="full-width">';
-        layout.append(newFormItem);
+        layout.appendChild(newFormItem);
         await nextRender();
         expect(getComputedStyle(newFormItem).marginLeft).to.be.equal('0px');
       });
