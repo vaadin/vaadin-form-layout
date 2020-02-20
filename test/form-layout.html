@@ -545,6 +545,19 @@
         expect(estimateEffectiveColspan(layout.children[0])).to.be.closeTo(2, .1);
       });
 
+      it('should update style after layout-item is not hidden', async() => {
+        sinon.spy(layout, '_invokeUpdateStyles');
+        const firstDisplay = layout.firstElementChild.style.display;
+        layout.firstElementChild.setAttribute('hidden', true);
+        container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = 'none';
+        layout.firstElementChild.removeAttribute('style');
+        expect(layout.firstElementChild.getAttribute('style')).to.equal('');
+        layout.firstElementChild.removeAttribute('hidden');
+        container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = firstDisplay;
+        await nextRender();
+        expect(layout.firstElementChild.getAttribute('style').length > 0 ? true : false).to.be.true;
+      });
+
       it('should update layout after updating a colspan attribute on the lazily stamped node', async() => {
         container.push('items', {label: 'Email', colspan: 1});
         await nextRender();
