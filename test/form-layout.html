@@ -551,7 +551,12 @@
         layout.firstElementChild.setAttribute('hidden', true);
         container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = 'none';
         layout.firstElementChild.removeAttribute('style');
-        expect(layout.firstElementChild.getAttribute('style')).to.equal('');
+        let isStyleAfterRemovedNullOrEmpty = false;
+        if (layout.firstElementChild.getAttribute('style') === ''
+            || layout.firstElementChild.getAttribute('style') === null) {
+          isStyleAfterRemovedNullOrEmpty = true;
+        }
+        expect(isStyleAfterRemovedNullOrEmpty).to.be.true;
         layout.firstElementChild.removeAttribute('hidden');
         container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = firstDisplay;
         await nextRender();
