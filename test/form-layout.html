@@ -545,22 +545,14 @@
         expect(estimateEffectiveColspan(layout.children[0])).to.be.closeTo(2, .1);
       });
 
-      it('should update style after layout-item is not hidden', async() => {
+      it('should update style if hidden of layout-item is changed', async() => {
         sinon.spy(layout, '_invokeUpdateStyles');
-        const firstDisplay = layout.firstElementChild.style.display;
-        layout.firstElementChild.setAttribute('hidden', true);
-        container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = 'none';
-        layout.firstElementChild.removeAttribute('style');
-        let isStyleAfterRemovedNullOrEmpty = false;
-        if (layout.firstElementChild.getAttribute('style') === ''
-            || layout.firstElementChild.getAttribute('style') === null) {
-          isStyleAfterRemovedNullOrEmpty = true;
-        }
-        expect(isStyleAfterRemovedNullOrEmpty).to.be.true;
-        layout.firstElementChild.removeAttribute('hidden');
-        container.shadowRoot.querySelector('vaadin-form-layout').firstElementChild.style.display = firstDisplay;
+        layout.firstElementChild.hidden = true;
         await nextRender();
-        expect(layout.firstElementChild.getAttribute('style').length > 0 ? true : false).to.be.true;
+        expect(layout._invokeUpdateStyles.called).to.be.true;
+        layout.firstElementChild.hidden = false;
+        await nextRender();
+        expect(layout._invokeUpdateStyles.called).to.be.true;
       });
 
       it('should update layout after updating a colspan attribute on the lazily stamped node', async() => {
