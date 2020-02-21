@@ -545,14 +545,19 @@
         expect(estimateEffectiveColspan(layout.children[0])).to.be.closeTo(2, .1);
       });
 
-      it('should update style if hidden of layout-item is changed', async() => {
-        sinon.spy(layout, '_invokeUpdateStyles');
+      it('should update style if hidden property of layout-item is changed and the element has not had style yet', async() => {
+        const initWidth = getComputedStyle(layout.firstElementChild).width;
         layout.firstElementChild.hidden = true;
-        await nextRender();
-        expect(layout._invokeUpdateStyles.called).to.be.true;
+        // Reproduce the bug: if the element has not received style yet( does not have),
+        // like setting visible is false in first time, instead it is visible(received the style) and then setting that element is invisible.
+        // Setting style is empty because if the layout-item has already style like width, and after setting hidden is true,
+        // the style is still there and it not is broken, if then setting the hidden is false.
+        layout.firstElementChild.style = '';
         layout.firstElementChild.hidden = false;
         await nextRender();
-        expect(layout._invokeUpdateStyles.called).to.be.true;
+        const widthAfterReStyle = getComputedStyle(layout.firstElementChild).width;
+        // Check the initial width is equal with the final width( the width is set style after hidden property is set false)
+        expect(initWidth).to.equal(widthAfterReStyle);
       });
 
       it('should update layout after updating a colspan attribute on the lazily stamped node', async() => {
