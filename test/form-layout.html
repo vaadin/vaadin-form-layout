@@ -552,7 +552,7 @@
         // like setting visible is false in first time, instead it is visible(received the style) and then setting that element is invisible.
         // Setting style is empty because if the layout-item has already style like width, and after setting hidden is true,
         // the style is still there and it not is broken, if then setting the hidden is false.
-        layout.firstElementChild.style = '';
+        layout.firstElementChild.removeAttribute('style');
         layout.firstElementChild.hidden = false;
         await nextRender();
         const widthAfterReStyle = getComputedStyle(layout.firstElementChild).width;
