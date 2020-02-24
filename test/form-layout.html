@@ -546,18 +546,17 @@
       });
 
       it('should update style if hidden property of layout-item is changed and the element has not had style yet', async() => {
-        const initWidth = getComputedStyle(layout.firstElementChild).width;
-        layout.firstElementChild.hidden = true;
-        // Reproduce the bug: if the element has not received style yet( does not have),
-        // like setting visible is false in first time, instead it is visible(received the style) and then setting that element is invisible.
-        // Setting style is empty because if the layout-item has already style like width, and after setting hidden is true,
-        // the style is still there and it not is broken, if then setting the hidden is false.
-        layout.firstElementChild.removeAttribute('style');
-        layout.firstElementChild.hidden = false;
+        const itemWidth = layout.children[0].getBoundingClientRect().width;
+        expect(itemWidth).to.be.above(0);
+        const newFormItem = document.createElement('vaadin-form-item');
+        newFormItem.hidden = true;
+        layout.appendChild(newFormItem);
         await nextRender();
-        const widthAfterReStyle = getComputedStyle(layout.firstElementChild).width;
-        // Check the initial width is equal with the final width( the width is set style after hidden property is set false)
-        expect(initWidth).to.equal(widthAfterReStyle);
+        expect(newFormItem.getBoundingClientRect().width).to.equal(0);
+        newFormItem.hidden = false;
+        await nextRender();
+        const unhiddenItemWidth = newFormItem.getBoundingClientRect().width;
+        expect(unhiddenItemWidth).to.equal(itemWidth);
       });
 
       it('should update layout after updating a colspan attribute on the lazily stamped node', async() => {
