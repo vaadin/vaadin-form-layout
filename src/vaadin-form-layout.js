@@ -263,11 +263,6 @@ class FormLayoutElement extends
     this.root.appendChild(this._styleElement);
     // Ensure there is a child text node in the style element
     this._styleElement.textContent = ' ';
-    if (window.ShadyDOM) {
-      // With ShadyDOM, setting textContent attaches text content nodes
-      // asynchronously, but we need it right away.
-      window.ShadyDOM.flush();
-    }
 
     super.ready();
 
@@ -437,13 +432,6 @@ class FormLayoutElement extends
       this._columnCount = selectedStep.columns;
       this._labelsOnTop = selectedStep.labelsPosition === 'top';
     }
-
-    if (/\b(Edge|Trident)\//.test(navigator.userAgent)) {
-      if (this.offsetWidth !== this._lastOffsetWidth) {
-        this.updateStyles(); // force breaks sizes update in IE and Edge
-        this._lastOffsetWidth = this.offsetWidth;
-      }
-    }
   }
 
   /** @private */
@@ -468,19 +456,13 @@ class FormLayoutElement extends
       by item margins of 1/2 * spacing on both sides
     */
 
-    const columnSpacing = window.ShadyCSS
-      ? window.ShadyCSS.getComputedStyleValue(this, '--vaadin-form-layout-column-spacing')
-      : getComputedStyle(this).getPropertyValue('--vaadin-form-layout-column-spacing');
+    const columnSpacing = getComputedStyle(this).getPropertyValue('--vaadin-form-layout-column-spacing');
 
     const direction = getComputedStyle(this).direction;
     const marginStartProp = 'margin-' + (direction === 'ltr' ? 'left' : 'right');
     const marginEndProp = 'margin-' + (direction === 'ltr' ? 'right' : 'left');
 
     const containerWidth = this.offsetWidth;
-
-    if (window.ShadyDOM) {
-      window.ShadyDOM.flush(); // `getComputedStyle` below needs that
-    }
 
     let col = 0;
     Array.from(this.children)
