@@ -1,8 +1,4 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
 import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 /**
  * `<vaadin-form-item>` is a Web Component providing labelled form item wrapper
@@ -108,7 +104,7 @@ import {html} from '@polymer/polymer/lib/utils/html-tag.js';
  */
 declare class FormItemElement extends
   ThemableMixin(
-  PolymerElement) {
+  HTMLElement) {
 }
 
 declare global {

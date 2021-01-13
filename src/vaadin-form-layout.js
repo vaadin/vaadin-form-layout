@@ -102,7 +102,7 @@ import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
  * ---|---|---
  * `--vaadin-form-layout-column-spacing` | Length of the spacing between columns | `2em`
  *
- * @extends PolymerElement
+ * @extends HTMLElement
  * @mixes ElementMixin
  * @mixes ThemableMixin
  */

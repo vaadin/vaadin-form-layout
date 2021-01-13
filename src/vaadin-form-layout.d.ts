@@ -1,18 +1,6 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {FlattenedNodesObserver} from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-
-import {IronResizableBehavior} from '@polymer/iron-resizable-behavior/iron-resizable-behavior.js';
-
 import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 
 import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-
-import {beforeNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-
-import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
 
 /**
  * `<vaadin-form-layout>` is a Web Component providing configurable responsive
@@ -107,7 +95,7 @@ import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
 declare class FormLayoutElement extends
   ElementMixin(
   ThemableMixin(
-  PolymerElement)) {
+  HTMLElement)) {
 
   /**
    * Allows specifying a responsive behavior with the number of columns
