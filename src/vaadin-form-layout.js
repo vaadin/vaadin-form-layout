@@ -456,9 +456,10 @@ class FormLayoutElement extends
       by item margins of 1/2 * spacing on both sides
     */
 
-    const columnSpacing = getComputedStyle(this).getPropertyValue('--vaadin-form-layout-column-spacing');
+    const style = getComputedStyle(this);
+    const columnSpacing = style.getPropertyValue('--vaadin-form-layout-column-spacing');
 
-    const direction = getComputedStyle(this).direction;
+    const direction = style.direction;
     const marginStartProp = 'margin-' + (direction === 'ltr' ? 'left' : 'right');
     const marginEndProp = 'margin-' + (direction === 'ltr' ? 'right' : 'left');
 
