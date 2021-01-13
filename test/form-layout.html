@@ -7,7 +7,6 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../../test-fixture/test-fixture.html">
   <link rel="import" href="../../vaadin-text-field/vaadin-text-field.html">
-  <link rel="import" href="../../paper-input/paper-input.html">
   <link rel="import" href="../vaadin-form-layout.html">
   <link rel="import" href="../vaadin-form-item.html">
 </head>
@@ -17,7 +16,6 @@
     <template>
       <vaadin-form-layout>
         <vaadin-text-field></vaadin-text-field>
-        <paper-input></paper-input>
         <vaadin-form-item></vaadin-form-item>
       </vaadin-form-layout>
     </template>
@@ -154,12 +152,6 @@
         var vaadinTextField = layout.querySelector('vaadin-text-field');
         expect(vaadinTextField).to.be.ok;
         expect(slot.assignedNodes()).to.contain(vaadinTextField);
-      });
-
-      it('should distribute paper-input', function() {
-        var paperInput = layout.querySelector('paper-input');
-        expect(paperInput).to.be.ok;
-        expect(slot.assignedNodes()).to.contain(paperInput);
       });
     });
 
