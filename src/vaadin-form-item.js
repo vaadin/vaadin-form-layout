@@ -175,11 +175,6 @@ class FormItemElement extends ThemableMixin(PolymerElement) {
     return 'vaadin-form-item';
   }
 
-  static get properties() {
-    return {
-    };
-  }
-
   /** @private */
   _onLabelClick(e) {
     // No `Array.prototype.find` in MSIE, using `filter` instead :-(
