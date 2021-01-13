@@ -1,9 +1,10 @@
-<link rel="import" href="../../../vaadin-lumo-styles/color.html">
-<link rel="import" href="../../../vaadin-lumo-styles/spacing.html">
-<link rel="import" href="../../../vaadin-lumo-styles/style.html">
-<link rel="import" href="../../../vaadin-lumo-styles/typography.html">
+import '@vaadin/vaadin-lumo-styles/color.js';
+import '@vaadin/vaadin-lumo-styles/spacing.js';
+import '@vaadin/vaadin-lumo-styles/style.js';
+import '@vaadin/vaadin-lumo-styles/typography.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<dom-module id="lumo-form-item" theme-for="vaadin-form-item">
+const $_documentContainer = html`<dom-module id="lumo-form-item" theme-for="vaadin-form-item">
   <template>
     <style>
       :host {
@@ -24,4 +25,6 @@
       }
     </style>
   </template>
-</dom-module>
+</dom-module>`;
+
+document.head.appendChild($_documentContainer.content);

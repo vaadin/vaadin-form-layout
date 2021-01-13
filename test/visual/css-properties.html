@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../../polymer/polymer-element.html">
-  <script>
-    const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
-    document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-layout.html">`);
-    document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-item.html">`);
-  </script>
-  <script>
-    window.addEventListener('WebComponentsReady', function() {
-      setTimeout(function() {
-        window.ShadyDOM && window.ShadyDOM.flush(); // Force DOM composition
-        window.webComponentsAreReady = true; // Checked in gemini before capture callback
-      });
-    });
-  </script>
+  <script src="../../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../../../../@polymer/polymer/polymer-element.js"></script>
+  <script type="module">
+import '@polymer/polymer/polymer-element.js';
+const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
+document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-layout.html">`);
+document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-item.html">`);
+</script>
+  <script type="module">
+import '@polymer/polymer/polymer-element.js';
+setTimeout(function() {
+  window.ShadyDOM && window.ShadyDOM.flush(); // Force DOM composition
+  window.webComponentsAreReady = true; // Checked in gemini before capture callback
+});
+</script>
 </head>
 <body>
 
@@ -56,16 +56,15 @@
       </vaadin-form-layout>
     </template>
   </dom-module>
-  <script>
-    addEventListener('WebComponentsReady', function() {
-      class MyFormElement extends Polymer.Element {
-        static get is() {
-          return 'my-form';
-        }
-      }
-      customElements.define(MyFormElement.is, MyFormElement);
-    });
-  </script>
+  <script type="module">
+import { PolymerElement } from '@polymer/polymer/polymer-element.js';
+class MyFormElement extends PolymerElement {
+  static get is() {
+    return 'my-form';
+  }
+}
+customElements.define(MyFormElement.is, MyFormElement);
+</script>
   <my-form id="capture"></my-form>
 
 </body>
