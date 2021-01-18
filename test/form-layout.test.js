@@ -103,28 +103,20 @@ describe('form layout', () => {
       // override to not depend on the theme changes
       layout.updateStyles({ '--lumo-space-l': '2rem' });
 
-      expect(getParsedWidth(layout.firstElementChild).spacing).to.be.oneOf([
-        '0.5 * 2rem', // MSIE
-        '-1rem', // Edge
-        '1rem'
-      ]);
+      expect(getParsedWidth(layout.firstElementChild).spacing).to.equal('1rem');
       expect(getComputedStyle(layout.firstElementChild).getPropertyValue('margin-left')).to.equal('0px'); // zero because it's first
       expect(getComputedStyle(layout.firstElementChild).getPropertyValue('margin-right')).to.equal('16px'); // 0.5 * 2rem in px
     });
 
     it('should support updating with `updateStyles` call', () => {
       layout.updateStyles({
-        '--vaadin-form-layout-column-spacing': '2cm',
-        '--vaadin-form-layout-label-width': '4cm',
-        '--vaadin-form-layout-label-spacing': '1cm'
+        '--vaadin-form-layout-column-spacing': '2rem',
+        '--vaadin-form-layout-label-width': '4rem',
+        '--vaadin-form-layout-label-spacing': '1rem'
       });
-      expect(getParsedWidth(layout.firstElementChild).spacing).to.be.oneOf([
-        '0.5 * 2cm', // MSIE
-        '-1cm', // Edge
-        '1cm'
-      ]);
-      expect(getComputedStyle(layout).getPropertyValue('--vaadin-form-layout-label-width')).to.equal('4cm');
-      expect(getComputedStyle(layout).getPropertyValue('--vaadin-form-layout-label-spacing')).to.equal('1cm');
+      expect(getParsedWidth(layout.firstElementChild).spacing).to.equal('1rem');
+      expect(getComputedStyle(layout).getPropertyValue('--vaadin-form-layout-label-width')).to.equal('4rem');
+      expect(getComputedStyle(layout).getPropertyValue('--vaadin-form-layout-label-spacing')).to.equal('1rem');
     });
   });
 
