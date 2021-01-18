@@ -177,11 +177,10 @@ class FormItemElement extends ThemableMixin(PolymerElement) {
 
   /** @private */
   _onLabelClick() {
-    // No `Array.prototype.find` in MSIE, using `filter` instead :-(
-    const firstContentElementChild = Array.prototype.filter.call(
+    const firstContentElementChild = Array.prototype.find.call(
       this.$.contentSlot.assignedNodes(),
       (e) => e.nodeType === Node.ELEMENT_NODE
-    )[0];
+    );
     if (firstContentElementChild) {
       firstContentElementChild.focus();
       firstContentElementChild.click();
