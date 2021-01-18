@@ -294,7 +294,7 @@ class FormLayoutElement extends ElementMixin(ThemableMixin(mixinBehaviors([IronR
           mutation.type === 'attributes' &&
           (mutation.attributeName === 'colspan' || mutation.attributeName === 'hidden')
         ) {
-          this._invokeUpdateStyles();
+          this.updateStyles();
         }
       });
     });
@@ -308,7 +308,7 @@ class FormLayoutElement extends ElementMixin(ThemableMixin(mixinBehaviors([IronR
       });
 
       if (addedNodes.length > 0 || removedNodes.length > 0) {
-        this._invokeUpdateStyles();
+        this.updateStyles();
       }
     });
   }
