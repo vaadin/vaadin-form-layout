@@ -2,29 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title></title>
-  <script src="../../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../../../../@polymer/polymer/polymer-element.js"></script>
-  <script type="module">
-import '@polymer/polymer/polymer-element.js';
-const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
-document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-layout.html">`);
-document.write(`<link rel="import" href="../../theme/${theme}/vaadin-form-item.html">`);
-</script>
-  <script type="module">
-import '@polymer/polymer/polymer-element.js';
-setTimeout(function() {
-  window.ShadyDOM && window.ShadyDOM.flush(); // Force DOM composition
-  window.webComponentsAreReady = true; // Checked in gemini before capture callback
-});
-</script>
+  <title>Form layout туц дшту tests</title>
+  <script>
+    window.polymerSkipLoadingFontRoboto = true;
+  </script>
 </head>
 <body>
 
-  <h3>Explicit New Row</h3>
-
-  <vaadin-form-layout id="capture">
-
+  <vaadin-form-layout id="tests">
     <vaadin-form-item>
       <label slot="label">Email</label>
       <input class="full-width" value="jane.doe@example.com">
@@ -36,8 +21,23 @@ setTimeout(function() {
       <label slot="label">Confirm Email</label>
       <input class="full-width" value="jane.doe@example.com">
     </vaadin-form-item>
-
   </vaadin-form-layout>
 
+  <script type="module">
+    (async () => {
+      const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
+
+      await Promise.all([
+        import('../../theme/' + theme + '/vaadin-form-layout.js'),
+        import('../../theme/' + theme + '/vaadin-form-item.js')
+      ]);
+
+      window.requestAnimationFrame(() => {
+        setTimeout(() => {
+          document.getElementById('tests').dataset.ready = true;
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
