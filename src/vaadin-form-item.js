@@ -114,61 +114,61 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
 class FormItemElement extends ThemableMixin(PolymerElement) {
   static get template() {
     return html`
-    <style>
-      :host {
-        display: inline-flex;
-        flex-direction: row;
-        align-items: baseline;
+      <style>
+        :host {
+          display: inline-flex;
+          flex-direction: row;
+          align-items: baseline;
 
-        /* CSS API for host */
-        --vaadin-form-item-label-width: 8em;
-        --vaadin-form-item-label-spacing: 1em;
-        --vaadin-form-item-row-spacing: 1em;
+          /* CSS API for host */
+          --vaadin-form-item-label-width: 8em;
+          --vaadin-form-item-label-spacing: 1em;
+          --vaadin-form-item-row-spacing: 1em;
 
-        margin: calc(0.5 * var(--vaadin-form-item-row-spacing)) 0;
-      }
+          margin: calc(0.5 * var(--vaadin-form-item-row-spacing)) 0;
+        }
 
-      :host([label-position="top"]) {
-        flex-direction: column;
-        align-items: stretch;
-      }
+        :host([label-position='top']) {
+          flex-direction: column;
+          align-items: stretch;
+        }
 
-      :host([hidden]) {
-        display: none !important;
-      }
+        :host([hidden]) {
+          display: none !important;
+        }
 
-      #label {
-        width: var(--vaadin-form-item-label-width);
-        flex: 0 0 auto;
-      }
+        #label {
+          width: var(--vaadin-form-item-label-width);
+          flex: 0 0 auto;
+        }
 
-      :host([label-position="top"]) #label {
-        width: auto;
-      }
+        :host([label-position='top']) #label {
+          width: auto;
+        }
 
-      #spacing {
-        width: var(--vaadin-form-item-label-spacing);
-        flex: 0 0 auto;
-      }
+        #spacing {
+          width: var(--vaadin-form-item-label-spacing);
+          flex: 0 0 auto;
+        }
 
-      #content {
-        flex: 1 1 auto;
-      }
+        #content {
+          flex: 1 1 auto;
+        }
 
-      #content ::slotted(.full-width) {
-        box-sizing: border-box;
-        width: 100%;
-        min-width: 0;
-      }
-    </style>
-    <div id="label" part="label" on-click="_onLabelClick">
-      <slot name="label" id="labelSlot"></slot>
-    </div>
-    <div id="spacing"></div>
-    <div id="content">
-      <slot id="contentSlot"></slot>
-    </div>
-`;
+        #content ::slotted(.full-width) {
+          box-sizing: border-box;
+          width: 100%;
+          min-width: 0;
+        }
+      </style>
+      <div id="label" part="label" on-click="_onLabelClick">
+        <slot name="label" id="labelSlot"></slot>
+      </div>
+      <div id="spacing"></div>
+      <div id="content">
+        <slot id="contentSlot"></slot>
+      </div>
+    `;
   }
 
   static get is() {
@@ -176,7 +176,7 @@ class FormItemElement extends ThemableMixin(PolymerElement) {
   }
 
   /** @private */
-  _onLabelClick(e) {
+  _onLabelClick() {
     // No `Array.prototype.find` in MSIE, using `filter` instead :-(
     const firstContentElementChild = Array.prototype.filter.call(
       this.$.contentSlot.assignedNodes(),

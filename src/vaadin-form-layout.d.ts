@@ -1,6 +1,6 @@
-import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
+import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 
-import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
+import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
 /**
  * `<vaadin-form-layout>` is a Web Component providing configurable responsive
@@ -92,11 +92,7 @@ import {ElementMixin} from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js
  * ---|---|---
  * `--vaadin-form-layout-column-spacing` | Length of the spacing between columns | `2em`
  */
-declare class FormLayoutElement extends
-  ElementMixin(
-  ThemableMixin(
-  HTMLElement)) {
-
+declare class FormLayoutElement extends ElementMixin(ThemableMixin(HTMLElement)) {
   /**
    * Allows specifying a responsive behavior with the number of columns
    * and the label position depending on the layout width.
@@ -142,16 +138,15 @@ declare class FormLayoutElement extends
   /**
    * Set custom CSS property values and update the layout.
    */
-  updateStyles(properties?: {[key: string]: string}): void;
+  updateStyles(properties?: { [key: string]: string }): void;
 }
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-form-layout": FormLayoutElement;
+    'vaadin-form-layout': FormLayoutElement;
   }
 }
 
-export {FormLayoutElement};
+export { FormLayoutElement };
 
-import {FormLayoutResponsiveStep} from '../@types/interfaces';
+import { FormLayoutResponsiveStep } from '../@types/interfaces';

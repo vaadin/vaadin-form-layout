@@ -1,4 +1,4 @@
-import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
+import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 
 /**
  * `<vaadin-form-item>` is a Web Component providing labelled form item wrapper
@@ -102,16 +102,12 @@ import {ThemableMixin} from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin
  *
  * See [ThemableMixin – how to apply styles for shadow parts](https://github.com/vaadin/vaadin-themable-mixin/wiki)
  */
-declare class FormItemElement extends
-  ThemableMixin(
-  HTMLElement) {
-}
+declare class FormItemElement extends ThemableMixin(HTMLElement) {}
 
 declare global {
-
   interface HTMLElementTagNameMap {
-    "vaadin-form-item": FormItemElement;
+    'vaadin-form-item': FormItemElement;
   }
 }
 
-export {FormItemElement};
+export { FormItemElement };

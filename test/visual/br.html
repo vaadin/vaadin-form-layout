@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Form layout туц дшту tests</title>
-  <script>
-    window.polymerSkipLoadingFontRoboto = true;
-  </script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form layout new line tests</title>
+    <script>
+      window.polymerSkipLoadingFontRoboto = true;
+    </script>
+  </head>
+  <body>
+    <vaadin-form-layout id="tests">
+      <vaadin-form-item>
+        <label slot="label">Email</label>
+        <input class="full-width" value="jane.doe@example.com" />
+      </vaadin-form-item>
 
-  <vaadin-form-layout id="tests">
-    <vaadin-form-item>
-      <label slot="label">Email</label>
-      <input class="full-width" value="jane.doe@example.com">
-    </vaadin-form-item>
+      <br />
 
-    <br>
+      <vaadin-form-item>
+        <label slot="label">Confirm Email</label>
+        <input class="full-width" value="jane.doe@example.com" />
+      </vaadin-form-item>
+    </vaadin-form-layout>
 
-    <vaadin-form-item>
-      <label slot="label">Confirm Email</label>
-      <input class="full-width" value="jane.doe@example.com">
-    </vaadin-form-item>
-  </vaadin-form-layout>
+    <script type="module">
+      (async () => {
+        const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
 
-  <script type="module">
-    (async () => {
-      const theme = window.location.search.replace(/.*theme=(\w+).*/, '$1') || 'lumo';
+        await Promise.all([
+          import('../../theme/' + theme + '/vaadin-form-layout.js'),
+          import('../../theme/' + theme + '/vaadin-form-item.js')
+        ]);
 
-      await Promise.all([
-        import('../../theme/' + theme + '/vaadin-form-layout.js'),
-        import('../../theme/' + theme + '/vaadin-form-item.js')
-      ]);
-
-      window.requestAnimationFrame(() => {
-        setTimeout(() => {
-          document.getElementById('tests').dataset.ready = true;
+        window.requestAnimationFrame(() => {
+          setTimeout(() => {
+            document.getElementById('tests').dataset.ready = true;
+          });
         });
-      });
-    })();
-  </script>
-</body>
+      })();
+    </script>
+  </body>
 </html>

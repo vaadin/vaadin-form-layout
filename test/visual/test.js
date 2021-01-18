@@ -7,11 +7,7 @@ describe('vaadin-form-layout', () => {
   };
 
   ['lumo', 'material'].forEach((theme) => {
-    [
-      'basic',
-      'styling',
-      'vertical-layout'
-    ].forEach((testName) => {
+    ['basic', 'styling', 'vertical-layout'].forEach((testName) => {
       it(`${theme}-${testName}`, function () {
         return this.browser
           .url(`${testName}.html?theme=${theme}`)
@@ -24,13 +20,7 @@ describe('vaadin-form-layout', () => {
       });
     });
 
-    [
-      'br',
-      'colspan',
-      'css-properties',
-      'responsive-steps',
-      'single-column'
-    ].forEach((testName) => {
+    ['br', 'colspan', 'css-properties', 'responsive-steps', 'single-column'].forEach((testName) => {
       it(`${theme}-${testName}`, function () {
         return this.browser
           .url(`${testName}.html?theme=${theme}`)

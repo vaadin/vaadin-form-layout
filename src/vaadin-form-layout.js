@@ -105,58 +105,55 @@ import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.
  * @mixes ElementMixin
  * @mixes ThemableMixin
  */
-class FormLayoutElement extends
-  ElementMixin(
-    ThemableMixin(
-      mixinBehaviors([IronResizableBehavior], PolymerElement))) {
+class FormLayoutElement extends ElementMixin(ThemableMixin(mixinBehaviors([IronResizableBehavior], PolymerElement))) {
   static get template() {
     return html`
-    <style>
-      :host {
-        display: block;
-        max-width: 100%;
-        animation: 1ms vaadin-form-layout-appear;
-        /* CSS API for host */
-        --vaadin-form-layout-column-spacing: 2em; /* (default) */
-        align-self: stretch;
-      }
-
-      @keyframes vaadin-form-layout-appear {
-        to {
-          opacity: 1 !important; /* stylelint-disable-line keyframe-declaration-no-important */
+      <style>
+        :host {
+          display: block;
+          max-width: 100%;
+          animation: 1ms vaadin-form-layout-appear;
+          /* CSS API for host */
+          --vaadin-form-layout-column-spacing: 2em; /* (default) */
+          align-self: stretch;
         }
-      }
 
-      :host([hidden]) {
-        display: none !important;
-      }
+        @keyframes vaadin-form-layout-appear {
+          to {
+            opacity: 1 !important; /* stylelint-disable-line keyframe-declaration-no-important */
+          }
+        }
 
-      #layout {
-        display: flex;
+        :host([hidden]) {
+          display: none !important;
+        }
 
-        align-items: baseline; /* default \`stretch\` is not appropriate */
+        #layout {
+          display: flex;
 
-        flex-wrap: wrap; /* the items should wrap */
-      }
+          align-items: baseline; /* default \`stretch\` is not appropriate */
 
-      #layout ::slotted(*) {
-        /* Items should neither grow nor shrink. */
-        flex-grow: 0;
-        flex-shrink: 0;
+          flex-wrap: wrap; /* the items should wrap */
+        }
 
-        /* Margins make spacing between the columns */
-        margin-left: calc(0.5 * var(--vaadin-form-layout-column-spacing));
-        margin-right: calc(0.5 * var(--vaadin-form-layout-column-spacing));
-      }
+        #layout ::slotted(*) {
+          /* Items should neither grow nor shrink. */
+          flex-grow: 0;
+          flex-shrink: 0;
 
-      #layout ::slotted(br) {
-        display: none;
-      }
-    </style>
-    <div id="layout">
-      <slot id="slot"></slot>
-    </div>
-`;
+          /* Margins make spacing between the columns */
+          margin-left: calc(0.5 * var(--vaadin-form-layout-column-spacing));
+          margin-right: calc(0.5 * var(--vaadin-form-layout-column-spacing));
+        }
+
+        #layout ::slotted(br) {
+          display: none;
+        }
+      </style>
+      <div id="layout">
+        <slot id="slot"></slot>
+      </div>
+    `;
   }
 
   static get is() {
@@ -218,11 +215,11 @@ class FormLayoutElement extends
        */
       responsiveSteps: {
         type: Array,
-        value: function() {
+        value: function () {
           return [
-            {minWidth: 0, columns: 1, labelsPosition: 'top'},
-            {minWidth: '20em', columns: 1},
-            {minWidth: '40em', columns: 2}
+            { minWidth: 0, columns: 1, labelsPosition: 'top' },
+            { minWidth: '20em', columns: 1 },
+            { minWidth: '40em', columns: 2 }
           ];
         },
         observer: '_responsiveStepsChanged'
@@ -247,9 +244,7 @@ class FormLayoutElement extends
   }
 
   static get observers() {
-    return [
-      '_invokeUpdateStyles(_columnCount, _labelsOnTop)'
-    ];
+    return ['_invokeUpdateStyles(_columnCount, _labelsOnTop)'];
   }
 
   /** @protected */
@@ -291,23 +286,24 @@ class FormLayoutElement extends
   /** @private */
   _observeChildrenColspanChange() {
     // Observe changes in form items' `colspan` attribute and update styles
-    const mutationObserverConfig = {attributes: true};
+    const mutationObserverConfig = { attributes: true };
 
-    this.__mutationObserver = new MutationObserver(mutationRecord => {
-      mutationRecord.forEach(mutation => {
-        if (mutation.type === 'attributes'
-          && ((mutation.attributeName === 'colspan')
-          || (mutation.attributeName === 'hidden'))) {
+    this.__mutationObserver = new MutationObserver((mutationRecord) => {
+      mutationRecord.forEach((mutation) => {
+        if (
+          mutation.type === 'attributes' &&
+          (mutation.attributeName === 'colspan' || mutation.attributeName === 'hidden')
+        ) {
           this._invokeUpdateStyles();
         }
       });
     });
 
-    this.__childObserver = new FlattenedNodesObserver(this, info => {
+    this.__childObserver = new FlattenedNodesObserver(this, (info) => {
       const addedNodes = this._getObservableNodes(info.addedNodes);
       const removedNodes = this._getObservableNodes(info.removedNodes);
 
-      addedNodes.forEach(child => {
+      addedNodes.forEach((child) => {
         this.__mutationObserver.observe(child, mutationObserverConfig);
       });
 
@@ -320,8 +316,9 @@ class FormLayoutElement extends
   /** @private */
   _getObservableNodes(nodeList) {
     const ignore = ['template', 'style', 'dom-repeat', 'dom-if'];
-    return Array.from(nodeList)
-      .filter(node => node.nodeType === Node.ELEMENT_NODE && ignore.indexOf(node.localName.toLowerCase()) === -1);
+    return Array.from(nodeList).filter(
+      (node) => node.nodeType === Node.ELEMENT_NODE && ignore.indexOf(node.localName.toLowerCase()) === -1
+    );
   }
 
   /** @private */
@@ -371,7 +368,7 @@ class FormLayoutElement extends
         throw new Error('Invalid empty "responsiveSteps" array, at least one item is required.');
       }
 
-      responsiveSteps.forEach(step => {
+      responsiveSteps.forEach((step) => {
         if (this._naturalNumberOrOne(step.columns) !== step.columns) {
           throw new Error(`Invalid 'columns' value of ${step.columns}, a natural number is required.`);
         }
@@ -381,7 +378,9 @@ class FormLayoutElement extends
         }
 
         if (step.labelsPosition !== undefined && ['aside', 'top'].indexOf(step.labelsPosition) === -1) {
-          throw new Error(`Invalid 'labelsPosition' value of ${step.labelsPosition}, 'aside' or 'top' string is required.`);
+          throw new Error(
+            `Invalid 'labelsPosition' value of ${step.labelsPosition}, 'aside' or 'top' string is required.`
+          );
         }
       });
     } catch (e) {
@@ -391,9 +390,9 @@ class FormLayoutElement extends
       } else {
         console.warn(`${e.message} Using default 'responsiveSteps' instead.`);
         this.responsiveSteps = [
-          {minWidth: 0, columns: 1, labelsPosition: 'top'},
-          {minWidth: '20em', columns: 1},
-          {minWidth: '40em', columns: 2}
+          { minWidth: 0, columns: 1, labelsPosition: 'top' },
+          { minWidth: '20em', columns: 1 },
+          { minWidth: '40em', columns: 2 }
         ];
       }
     }
@@ -413,7 +412,7 @@ class FormLayoutElement extends
     // Iterate through responsiveSteps and choose the step
     let selectedStep;
     const tmpStyleProp = 'background-position';
-    this.responsiveSteps.forEach(step => {
+    this.responsiveSteps.forEach((step) => {
       // Convert minWidth to px units for comparison
       this.$.layout.style.setProperty(tmpStyleProp, step.minWidth);
       const stepMinWidthPx = parseFloat(getComputedStyle(this.$.layout).getPropertyValue(tmpStyleProp));
@@ -467,7 +466,7 @@ class FormLayoutElement extends
 
     let col = 0;
     Array.from(this.children)
-      .filter(child => child.localName === 'br' || getComputedStyle(child).display !== 'none')
+      .filter((child) => child.localName === 'br' || getComputedStyle(child).display !== 'none')
       .forEach((child, index, children) => {
         if (child.localName === 'br') {
           // Reset column count on line break
@@ -492,7 +491,6 @@ class FormLayoutElement extends
           col = 0;
         }
 
-
         // At the start edge
         if (col === 0) {
           child.style.setProperty(marginStartProp, '0px');
@@ -508,7 +506,10 @@ class FormLayoutElement extends
           child.style.setProperty(marginEndProp, '0px');
         } else if (nextLineBreak) {
           const colspanRatio = (this._columnCount - col - colspan) / this._columnCount;
-          child.style.setProperty(marginEndProp, `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`);
+          child.style.setProperty(
+            marginEndProp,
+            `calc(${colspanRatio * containerWidth}px + ${colspanRatio} * ${columnSpacing})`
+          );
         } else {
           child.style.removeProperty(marginEndProp);
         }
