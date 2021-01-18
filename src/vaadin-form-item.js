@@ -73,21 +73,11 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
  *
  * The `label-position` host attribute can be used to target the label on top state:
  *
- * <pre><code>
- * &lt;dom-module id="my-form-item-theme" theme-for="vaadin-form-item"&gt;
- *   &lt;template&gt;
- *     &lt;style&gt;
- *       :host {
- *         /&#42; default state styles, label aside &#42;/
- *       }
- *
- *       :host([label-position="top"]) {
- *         /&#42; label on top state styles &#42;/
- *       }
- *     &lt;/style&gt;
- *   &lt;/template&gt;
- * &lt;/dom-module&gt;
- * </code></pre>
+ * ```
+ * :host([label-position="top"]) {
+ *   padding-top: 0.5rem;
+ * }
+ * ```
  *
  * The following shadow DOM parts are available for styling:
  *
