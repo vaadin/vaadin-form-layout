@@ -2,6 +2,8 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
 
 import { ElementMixin } from '@vaadin/vaadin-element-mixin/vaadin-element-mixin.js';
 
+import { FormLayoutResponsiveStep } from './interfaces';
+
 /**
  * `<vaadin-form-layout>` is a Web Component providing configurable responsive
  * layout for form elements.
@@ -131,9 +133,6 @@ declare class FormLayoutElement extends ElementMixin(ThemableMixin(HTMLElement))
    * ```
    */
   responsiveSteps: FormLayoutResponsiveStep[];
-  ready(): void;
-  connectedCallback(): void;
-  disconnectedCallback(): void;
 
   /**
    * Set custom CSS property values and update the layout.
@@ -148,5 +147,3 @@ declare global {
 }
 
 export { FormLayoutElement };
-
-import { FormLayoutResponsiveStep } from '../@types/interfaces';
