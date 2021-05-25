@@ -1,26 +1,22 @@
+# &lt;vaadin-form-layout&gt;
+
+> ⚠️ Starting from Vaadin 20, the source code and issues for this component are migrated to the [`vaadin/web-components`](https://github.com/vaadin/web-components/tree/master/packages/vaadin-form-layout) monorepository.
+> This repository contains the source code and releases of `<vaadin-form-layout>` for the Vaadin versions 10 to 19.
+
+[&lt;vaadin-form-layout&gt;](https://vaadin.com/components/vaadin-form-layout) is a Web Component providing configurable responsive layout for form elements, part of the [Vaadin components](https://vaadin.com/components).
+
+[Live Demo ↗](https://vaadin.com/components/vaadin-form-layout/html-examples)
+|
+[API documentation ↗](https://vaadin.com/components/vaadin-form-layout/html-api)
+
 [![npm version](https://badgen.net/npm/v/@vaadin/vaadin-form-layout)](https://www.npmjs.com/package/@vaadin/vaadin-form-layout)
 [![Bower version](https://badgen.net/github/release/vaadin/vaadin-form-layout)](https://github.com/vaadin/vaadin-form-layout/releases)
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/vaadin/vaadin-form-layout)
 [![Build Status](https://travis-ci.org/vaadin/vaadin-form-layout.svg?branch=master)](https://travis-ci.org/vaadin/vaadin-form-layout)
 [![Coverage Status](https://coveralls.io/repos/github/vaadin/vaadin-form-layout/badge.svg?branch=master)](https://coveralls.io/github/vaadin/vaadin-form-layout?branch=master)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/vaadin/web-components?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 [![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/vaadinvaadin-form-layout)
 [![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/vaadinvaadin-form-layout.svg)](https://vaadin.com/directory/component/vaadinvaadin-form-layout)
-
-# &lt;vaadin-form-layout&gt;
-
-> ⚠️ 　Starting from Vaadin 20, this project has migrated to [`vaadin-web-components`](https://github.com/vaadin/vaadin-web-components/tree/master/packages/vaadin-form-layout) *monorepository*.
->
-> This repository is used for Vaadin 14 LTS and Vaadin 19.
-
----
-
-[Live Demo ↗](https://vaadin.com/components/vaadin-form-layout/html-examples)
-|
-[API documentation ↗](https://vaadin.com/components/vaadin-form-layout/html-api)
-
-[&lt;vaadin-form-layout&gt;](https://vaadin.com/components/vaadin-form-layout) is a Web Component providing configurable responsive layout for form elements, part of the [Vaadin components](https://vaadin.com/components).
 
 <!--
 ```
